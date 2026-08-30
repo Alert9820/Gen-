@@ -40,10 +40,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.0
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.4em; font-family: var(--body-font); font-weight: 600; font-size: 0.95rem; padding: 0.85em 1.6em; border-radius: var(--radius); text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease; }
 .btn:hover { transform: translateY(-1px); }
-.btn-primary { background: var(--oxblood); color: #fff; }
-.btn-primary:hover { background: #7d323d; }
+.btn-primary { background: var(--oxblood); color: #fff; box-shadow: 0 0 0 rgba(107,42,52,0); }
+.btn-primary:hover { background: #7d323d; box-shadow: 0 10px 30px rgba(107,42,52,0.45); }
 .btn-outline { border-color: var(--muted-light); color: var(--ink); background: transparent; }
-.btn-outline:hover { border-color: var(--oxblood); }
+.btn-outline:hover { border-color: var(--oxblood); box-shadow: 0 8px 24px rgba(107,42,52,0.12); }
 .btn-sm { padding: 0.55em 1.2em; font-size: 0.85rem; }
 
 .nav { position: sticky; top: 0; z-index: 50; background: rgba(10, 15, 28, 0.9); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line-dark); }
@@ -56,19 +56,33 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.0
 @media (max-width: 760px) { .nav-links { display: none; } }
 
 /* ---------- Hero ---------- */
-.hero { background: var(--sky-night-low); padding: 4em 1.5em 5em; }
-.hero-inner { max-width: 1160px; margin: 0 auto; }
+.hero { background: var(--sky-night-low); padding: 4em 1.5em 5em; position: relative; overflow: hidden; }
+.hero-blob { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; }
+.hero-blob-a { width: 460px; height: 460px; background: var(--oxblood); opacity: 0.4; top: -160px; left: -120px; animation: blobFloat 16s ease-in-out infinite; }
+.hero-blob-b { width: 400px; height: 400px; background: var(--ochre); opacity: 0.28; bottom: -160px; right: -100px; animation: blobFloat 20s ease-in-out infinite reverse; }
+.hero-blob-c { width: 280px; height: 280px; background: #3e5f9e; opacity: 0.3; top: 40%; left: 50%; animation: blobFloat 24s ease-in-out infinite; animation-delay: -6s; }
+@keyframes blobFloat { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(30px, -24px) scale(1.1); } }
+.hero-spotlight { position: absolute; inset: 0; pointer-events: none; z-index: 1; background: radial-gradient(560px circle at var(--x, 50%) var(--y, 20%), rgba(232, 190, 110, 0.14), transparent 62%); }
+.hero-inner { max-width: 1160px; margin: 0 auto; position: relative; z-index: 2; }
 .hero-copy { max-width: 680px; margin: 0 auto 3em; text-align: center; }
-.hero-copy h1 { color: #F3F0E8; font-size: clamp(2.2rem, 5vw, 3.3rem); line-height: 1.08; }
+.hero-copy h1 {
+  font-size: clamp(2.4rem, 5.4vw, 3.6rem);
+  line-height: 1.06;
+  background: linear-gradient(135deg, #ffffff 20%, var(--ochre-light) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 2px 30px rgba(232, 190, 110, 0.15));
+}
 .hero-sub { color: var(--muted-light); font-size: 1.08rem; line-height: 1.65; margin: 0 auto 1.8em; max-width: 54ch; }
 .hero-ctas { display: flex; gap: 0.9em; flex-wrap: wrap; justify-content: center; margin-bottom: 0.5em; }
 .hero .btn-outline { border-color: #33405c; color: #F3F0E8; }
-.hero .btn-outline:hover { border-color: var(--ochre-light); }
+.hero .btn-outline:hover { border-color: var(--ochre-light); box-shadow: 0 8px 26px rgba(232,190,110,0.2); }
 .badge-row { display: flex; gap: 1em; flex-wrap: wrap; justify-content: center; margin-top: 2.2em; }
 .badge { border: 1px solid #2a3654; border-radius: 999px; padding: 0.5em 1.1em; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--ochre-light); text-transform: uppercase; }
 
 /* ---------- Empire-of-light hero scene ---------- */
-.scene { position: relative; max-width: 1000px; margin: 0 auto; height: 380px; border-radius: 10px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,0.5); }
+.scene { position: relative; max-width: 1000px; margin: 0 auto; height: 380px; border-radius: 10px; overflow: hidden; box-shadow: 0 30px 70px rgba(0,0,0,0.5), 0 0 60px rgba(217,165,68,0.12), 0 0 0 1px rgba(232,190,110,0.15); }
 .scene-day { position: absolute; top: 0; left: 0; right: 0; height: 56%; background: linear-gradient(180deg, var(--sky-day-top) 0%, var(--sky-day-mid) 65%, var(--sky-day-low) 100%); overflow: hidden; }
 .scene-night { position: absolute; bottom: 0; left: 0; right: 0; height: 44%; background: linear-gradient(180deg, var(--sky-night-top) 0%, var(--sky-night-low) 100%); overflow: hidden; }
 .stars { position: absolute; inset: 0; background-image: radial-gradient(circle, #ffffff 1px, transparent 1.4px); background-size: 30px 26px; opacity: 0.35; }
@@ -123,7 +137,17 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.0
 .industry-grid { margin-top: 2.6em; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2em; }
 @media (max-width: 800px) { .industry-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .industry-grid { grid-template-columns: 1fr; } }
-.industry-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4em; }
+.industry-card {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 10px;
+  padding: 1.5em;
+  text-align: left;
+  box-shadow: 0 6px 20px rgba(23,26,33,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.industry-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(107,42,52,0.18); border-color: var(--oxblood); }
 .industry-card h3 { font-size: 1.1rem; margin-bottom: 0.3em; }
 .industry-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.55; margin: 0; }
 
@@ -155,14 +179,19 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.0
   border: none;
   cursor: pointer;
   background: linear-gradient(135deg, var(--oxblood), var(--plum));
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 0 0 rgba(217,165,68,0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 200;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: launcherGlow 2.6s ease-in-out infinite;
 }
-.chat-launcher:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(0,0,0,0.4); }
+@keyframes launcherGlow {
+  0%, 100% { box-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 0 0 rgba(217,165,68,0.35); }
+  50% { box-shadow: 0 10px 30px rgba(0,0,0,0.35), 0 0 0 10px rgba(217,165,68,0); }
+}
+.chat-launcher:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 14px 34px rgba(0,0,0,0.4); animation: none; }
 .chat-launcher svg { width: 26px; height: 26px; stroke: #fff; fill: none; transition: opacity 0.15s ease, transform 0.15s ease; }
 .chat-launcher .icon-close { position: absolute; opacity: 0; transform: scale(0.6) rotate(-45deg); }
 .chat-launcher.open .icon-chat { opacity: 0; transform: scale(0.6) rotate(45deg); }
@@ -287,7 +316,14 @@ h1, h2, h3 { font-family: var(--display); font-weight: 600; letter-spacing: -0.0
   .chat-launcher { right: 16px; bottom: 16px; }
 }
 
-@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(.2,.7,.3,1), transform 0.7s cubic-bezier(.2,.7,.3,1); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.industry-card.reveal { transition-delay: var(--reveal-delay, 0s); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--ochre); outline-offset: 2px; }
 </style>
 </head>
@@ -316,7 +352,11 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 
 <main id="top">
 
-  <section class="hero">
+  <section class="hero" id="hero-section">
+    <div class="hero-blob hero-blob-a"></div>
+    <div class="hero-blob hero-blob-b"></div>
+    <div class="hero-blob hero-blob-c"></div>
+    <div class="hero-spotlight" id="hero-spotlight"></div>
     <div class="hero-inner">
       <div class="hero-copy">
         <p class="eyebrow eyebrow-light">AI receptionists for businesses of any size</p>
@@ -367,7 +407,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   </section>
 
   <section class="section section-alt">
-    <div class="section-inner narrow">
+    <div class="section-inner narrow reveal">
       <p class="eyebrow">The gap after closing time</p>
       <h2>Somewhere, right now, someone is asking your business a question</h2>
       <p class="body-copy">
@@ -380,7 +420,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   </section>
 
   <section class="section section-dark" id="how">
-    <div class="section-inner">
+    <div class="section-inner reveal">
       <p class="eyebrow eyebrow-light">The flow</p>
       <h2 class="h-light">Three steps, no dispatcher required</h2>
       <div class="steps">
@@ -404,7 +444,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   </section>
 
   <section class="section section-light" id="demo">
-    <div class="section-inner narrow center">
+    <div class="section-inner narrow center reveal">
       <p class="eyebrow">Try it yourself</p>
       <h2>This is Gen Solutions' own AI receptionist</h2>
       <p class="body-copy">
@@ -420,16 +460,16 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
   </section>
 
   <section class="section section-alt" id="industries">
-    <div class="section-inner center">
+    <div class="section-inner center reveal">
       <p class="eyebrow">Built for any business</p>
       <h2>If people ask you questions, this works for you</h2>
       <div class="industry-grid">
-        <div class="industry-card"><h3>Clinics &amp; healthcare</h3><p>Appointment requests and basic triage, captured even outside office hours.</p></div>
-        <div class="industry-card"><h3>Home services &amp; trades</h3><p>Service type, location, and urgency — sorted before a technician is even dispatched.</p></div>
-        <div class="industry-card"><h3>Salons &amp; personal care</h3><p>Booking requests handled the moment someone thinks of you, not when you're free to call back.</p></div>
-        <div class="industry-card"><h3>Real estate</h3><p>Listing questions and viewing requests answered instantly, any hour a buyer is browsing.</p></div>
-        <div class="industry-card"><h3>Restaurants &amp; hospitality</h3><p>Reservations, hours, and menu questions handled without pulling staff off the floor.</p></div>
-        <div class="industry-card"><h3>Professional services</h3><p>Consultations and general inquiries qualified before they ever reach your calendar.</p></div>
+        <div class="industry-card reveal" style="--reveal-delay:0s"><h3>Clinics &amp; healthcare</h3><p>Appointment requests and basic triage, captured even outside office hours.</p></div>
+        <div class="industry-card reveal" style="--reveal-delay:0.06s"><h3>Home services &amp; trades</h3><p>Service type, location, and urgency — sorted before a technician is even dispatched.</p></div>
+        <div class="industry-card reveal" style="--reveal-delay:0.12s"><h3>Salons &amp; personal care</h3><p>Booking requests handled the moment someone thinks of you, not when you're free to call back.</p></div>
+        <div class="industry-card reveal" style="--reveal-delay:0.18s"><h3>Real estate</h3><p>Listing questions and viewing requests answered instantly, any hour a buyer is browsing.</p></div>
+        <div class="industry-card reveal" style="--reveal-delay:0.24s"><h3>Restaurants &amp; hospitality</h3><p>Reservations, hours, and menu questions handled without pulling staff off the floor.</p></div>
+        <div class="industry-card reveal" style="--reveal-delay:0.3s"><h3>Professional services</h3><p>Consultations and general inquiries qualified before they ever reach your calendar.</p></div>
       </div>
     </div>
   </section>
@@ -444,7 +484,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
     </div>
     <div class="footer-contact">
       <a href="tel:+918468950877">+91 84689 50877</a>
-      <a href="mailto:sunnychaurashiya76@gmail.com">sunnychaurashiya76@gmail.com</a>
+      <a href="mailto:genneob2c@gmail.com">genneob2c@gmail.com</a>
       <a href="https://www.linkedin.com/in/gen-solutions-1a64a9431" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </div>
@@ -480,6 +520,35 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 </div>
 
 <script>
+(function () {
+  // Cursor-following glow in the hero
+  const heroSection = document.getElementById("hero-section");
+  const spotlight = document.getElementById("hero-spotlight");
+  if (heroSection && spotlight) {
+    heroSection.addEventListener("mousemove", (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      spotlight.style.setProperty("--x", (e.clientX - rect.left) + "px");
+      spotlight.style.setProperty("--y", (e.clientY - rect.top) + "px");
+    });
+  }
+
+  // Scroll-triggered reveal animations
+  const revealEls = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add("in-view"));
+  }
+})();
+
 (function () {
   const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
